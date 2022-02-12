@@ -1,15 +1,28 @@
-// import { funcSamples } from "./function.js";
-import globalVariable from "./global_variable.js";
-import iifeSample from "./iife.js";
-import scopeChain from "./scope_chain.js";
-import variableSample from "./variable.js";
-// import { hoistingSample } from "./hoisting.js";
-// import { executionContextSample } from "./execution-context.js";
-
 // executionContextSample();
 // hoistingSample();
 // funcSamples();
 // variableSample();
 // scopeChain();
 // globalVariable();
-iifeSample();
+// iifeSample();
+// thisSample(window);
+
+const a = function () {
+  console.log("a", this);
+  const b = function () {
+    console.log("b", this);
+    const c = {
+      hi: function () {
+        console.log("c", this);
+      },
+    };
+    c.hi();
+  };
+  b();
+};
+
+a();
+// EC:c
+// a, window
+// b, window
+// c, c
