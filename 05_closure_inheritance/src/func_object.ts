@@ -72,3 +72,86 @@ function b() {
 
 var d = b();
 d();
+
+function a(param = 6) {
+  console.log(param);
+}
+
+a();
+
+// HOF
+// why HOF is useful?
+
+// bad approach, violate the rule, DRY
+function letAdamLogin() {
+  let arr = [];
+  for (let i = 0; i < 999999; i++) {
+    arr.push(i);
+  }
+  return "Access Granted to Adam";
+}
+result = letAdamLogin();
+console.log(result);
+
+function letEvaLogin() {
+  let arr = [];
+  for (let i = 0; i < 999999; i++) {
+    arr.push(i);
+  }
+  return "Access Granted to Eva";
+}
+result = letEvaLogin();
+console.log(result);
+
+const giveAccessTo = (name: string) => "Access Granted to " + name;
+
+// better approach with argument
+function letUserLogin(user: string) {
+  let arr = [];
+  for (let i = 0; i < 999999; i++) {
+    arr.push(i);
+  }
+  return giveAccessTo(user);
+}
+
+result = letUserLogin("Adam");
+console.log(result);
+result = letUserLogin("Eva");
+console.log(result);
+
+function authenticate(person: Person, verify: number) {
+  let arr = [];
+  for (let i = 0; i < verify; i++) {
+    arr.push(i);
+  }
+  return giveAccessTo(person.name);
+}
+
+type Person = {
+  name: string;
+  level: string;
+};
+
+function sing(person: Person) {
+  return `la la la ${person.name}`;
+}
+
+function letPerson(person: Person, fn: Function) {
+  if (person.level === "admin") {
+    return fn(person);
+  } else if (person.level === "user") {
+    return fn(person);
+  }
+}
+result = letPerson({ name: "Ran", level: "user" }, authenticate);
+console.log(result);
+result = letPerson({ name: "Jack", level: "admin" }, authenticate);
+console.log(result);
+result = letPerson({ name: "Jack", level: "admin" }, sing);
+console.log(result);
+
+const multiplyBy = (baseNum: number, rate: number) => {
+  return baseNum * rate;
+};
+result = multiplyBy(3, 2);
+console.log(result);
