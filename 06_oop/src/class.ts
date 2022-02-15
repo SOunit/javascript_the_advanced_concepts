@@ -1,16 +1,20 @@
-// Constructor Function
-function Elf(this: any, name: string, weapon: string) {
-  this.name = name;
-  this.weapon = weapon;
+// ES6 Class
+class Elf {
+  name: string;
+  weapon: string;
+
+  constructor(name: string, weapon: string) {
+    this.name = name;
+    this.weapon = weapon;
+  }
+
+  attack() {
+    console.log(`attack with ${this.weapon}`);
+  }
 }
 
-// "this" in function has dynamic pointer
-// "this" in arrow function has lexical pointer
-Elf.prototype.attack = function () {
-  console.log(`attack with ${this.weapon}`);
-};
-
 const peter = new Elf("peter", "stones");
+console.log(peter instanceof Elf);
 console.log(peter);
 peter.attack();
 
